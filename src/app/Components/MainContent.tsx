@@ -6,15 +6,28 @@ import { useEffect, useState } from 'react';
 import DataTable from './DataTable';
 import data from './data.json'
 
-interface MainContentProps {
-    // Define props if needed
+interface DataItem {
+    Source: string;
+    Amount: number;
+    Status: string;
+    UserID: number;
+    Joined: string;
+    Group: string;
 }
+
+interface MainContentProps { }
+
 
 const MainContent: React.FC<MainContentProps> = ({ }) => {
 
-    const [jsonData, setJsonData] = useState([]);
+    const [jsonData, setJsonData] = useState<DataItem[]>([]);
 
-    //Data for the chart
+    useEffect(() => {
+        setJsonData(data);
+    }, []);
+
+
+
     const dataset = [
         { name: 'Sun', instagram: 4000, facebook: 2400, amt: 0 },
         { name: 'Mon', instagram: 3000, facebook: 1398, amt: 100 },
@@ -25,14 +38,12 @@ const MainContent: React.FC<MainContentProps> = ({ }) => {
         { name: 'Sat', instagram: 3490, facebook: 4300, amt: 600 },
     ];
 
-    useEffect(() => {
-        setJsonData(data); // Set the JSON data directly
-    }, []);
+
 
 
     return (
         <div className="flex-1 bg-gray-200">
-            {/* Main content goes here */}
+
             <div className="bg-black text-white w-full h-36 flex justify-between p-4 rounded-lg">
                 <div className="flex flex-col">
                     <h1>Unlock Premium Status</h1>
